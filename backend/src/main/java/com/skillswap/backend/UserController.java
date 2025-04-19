@@ -1,21 +1,24 @@
 package com.skillswap.backend;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 public class UserController {
 
-    @GetMapping("/user")
-    public User getUserProfile(){
-        return new User(
-                "Anya",
-                "anya@example.com",
-                "Guitar",
-                "Spanish"
-        );
+    @Autowired
+    private UserService userService;
+    @GetMapping("/users")
+    public List<User> getUserProfile(){
+        return userService.getAllUsers();
     }
 
+    @GetMapping("/user/{name}")
+    public User getUserByName(@PathVariable String name){
+        return userService.getUserByName(name);
+    }
 }
