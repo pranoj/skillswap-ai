@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService {
+public class git UserService {
 
     private final List<User> users = new ArrayList<>();
 
@@ -20,10 +20,10 @@ public class UserService {
     }
 
     public User getUserByName(String name){
-        return getAllUsers().stream()
+        return users.stream()
                 .filter(user -> user.getName().equalsIgnoreCase(name))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new UserNotFoundException(name));
     }
 
     public void addUser(User user){
